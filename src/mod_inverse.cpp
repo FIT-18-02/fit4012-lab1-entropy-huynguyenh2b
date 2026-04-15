@@ -26,11 +26,16 @@ int extended_euclid(int a, int b, int &x, int &y) {
 }
 
 int mod_inverse(int a, int m) {
-    // TODO(student): implement modular inverse using extended_euclid()
-    // If inverse does not exist, return -1.
-    (void)a;
-    (void)m;
-    return -1;
+    int x, y;
+    int g = extended_euclid(a, m, x, y);
+
+    // Nếu ước chung lớn nhất không phải là 1, không có nghịch đảo
+    if (g != 1) {
+        return -1;
+    }
+
+    // Đảm bảo kết quả luôn là số dương trong khoảng từ 0 đến m-1
+    return (x % m + m) % m;
 }
 
 int main() {
